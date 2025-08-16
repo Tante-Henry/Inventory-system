@@ -22,15 +22,20 @@ class Router
 
         if (isset($this->routes[$httpMethod])) {
             foreach ($this->routes[$httpMethod] as $route => $action) {
-                $pattern = '#^' . preg_replace('#\{[^/]+\}#', '([^/]+)', $route) . '$#';
+                $paramNames = [];
+                $pattern = '#^' . preg_replace_callback('#\{([^/]+)\}#', function ($m) use (&$paramNames) {
+                    $paramNames[] = $m[1];
+                    return '([^/]+)';
+                }, $route) . '$#';
                 if (preg_match($pattern, $path, $matches)) {
                     array_shift($matches);
+                    $params = array_combine($paramNames, $matches);
                     list($controllerName, $method) = explode('@', $action);
                     $controllerFile = __DIR__ . '/../controllers/' . $controllerName . '.php';
                     if (file_exists($controllerFile)) {
                         $controller = new $controllerName();
                         if (method_exists($controller, $method)) {
-                            call_user_func_array([$controller, $method], $matches);
+                            call_user_func_array([$controller, $method], array_values($params));
                             return;
                         }
                     }
