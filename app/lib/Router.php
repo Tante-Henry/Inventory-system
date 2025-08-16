@@ -1,16 +1,25 @@
 <?php
 class Router
 {
+    // Explicit route mappings for the Item resource. The {id} segments are
+    // captured and passed to the respective controller methods.
     private $routes = [
         'GET' => [
+            // List all items
             'items' => 'ItemController@index',
+            // Show a single item by ID
             'items/{id}' => 'ItemController@show',
+            // Display the form to create a new item
             'items/create' => 'ItemController@create',
+            // Display the form to edit an existing item
             'items/{id}/edit' => 'ItemController@edit',
         ],
         'POST' => [
+            // Persist a newly created item
             'items' => 'ItemController@store',
+            // Update an existing item identified by ID
             'items/{id}' => 'ItemController@update',
+            // Delete an item by ID
             'items/{id}/delete' => 'ItemController@destroy',
         ],
     ];
