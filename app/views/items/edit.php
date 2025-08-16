@@ -5,7 +5,7 @@
 </head>
 <body>
 <h1>Edit Item</h1>
-<form method="POST" action="/item/update/<?php echo $item->id; ?>">
+<form method="POST" action="/items/<?php echo $item->id; ?>">
     <?php include __DIR__ . '/form.php'; ?>
 </form>
 </body>

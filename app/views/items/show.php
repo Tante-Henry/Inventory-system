@@ -11,8 +11,8 @@
     <li>Price: <?php echo htmlspecialchars($item->price); ?></li>
 </ul>
 <p>
-    <a href="/item/edit/<?php echo $item->id; ?>">Edit</a>
-    <a href="/item/index">Back to List</a>
+    <a href="/items/<?php echo $item->id; ?>/edit">Edit</a>
+    <a href="/items">Back to List</a>
 </p>
 </body>
 </html>
