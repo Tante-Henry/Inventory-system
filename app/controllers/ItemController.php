@@ -2,27 +2,38 @@
 
 class ItemController
 {
+    /**
+     * Display a listing of all items.
+     */
     public function index()
     {
         $items = Item::all();
         require __DIR__ . '/../views/items/index.php';
     }
 
+    /**
+     * Display the specified item or show a 404 page if not found.
+     */
     public function show($id)
     {
         $item = Item::find($id);
         if (!$item) {
             $this->notFound();
-            return;
         }
         require __DIR__ . '/../views/items/show.php';
     }
 
+    /**
+     * Show the form for creating a new item.
+     */
     public function create()
     {
         require __DIR__ . '/../views/items/create.php';
     }
 
+    /**
+     * Store a newly created item after validating the request data.
+     */
     public function store()
     {
         $data = $this->validateRequest($_POST);
@@ -36,22 +47,26 @@ class ItemController
         exit;
     }
 
+    /**
+     * Show the form for editing the specified item.
+     */
     public function edit($id)
     {
         $item = Item::find($id);
         if (!$item) {
             $this->notFound();
-            return;
         }
         require __DIR__ . '/../views/items/edit.php';
     }
 
+    /**
+     * Update the specified item after validating the request data.
+     */
     public function update($id)
     {
         $item = Item::find($id);
         if (!$item) {
             $this->notFound();
-            return;
         }
         $data = $this->validateRequest($_POST, true);
         if ($data === false) {
@@ -64,18 +79,23 @@ class ItemController
         exit;
     }
 
+    /**
+     * Remove the specified item from storage.
+     */
     public function destroy($id)
     {
         $item = Item::find($id);
         if (!$item) {
             $this->notFound();
-            return;
         }
         Item::delete($id);
         header('Location: /item/index');
         exit;
     }
 
+    /**
+     * Validate request data. When $partial is true fields are optional.
+     */
     private function validateRequest($input, $partial = false)
     {
         $data = [];
@@ -113,9 +133,13 @@ class ItemController
         return $data;
     }
 
+    /**
+     * Render the 404 error page and terminate execution.
+     */
     private function notFound()
     {
         http_response_code(404);
         require __DIR__ . '/../views/errors/404.php';
+        exit;
     }
 }
