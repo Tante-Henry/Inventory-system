@@ -43,7 +43,7 @@ class ItemController
             return;
         }
         $item = Item::create($data);
-        header('Location: /item/show/' . $item->id);
+        header('Location: /items/' . $item->id);
         exit;
     }
 
@@ -75,7 +75,7 @@ class ItemController
             return;
         }
         $item = Item::update($id, $data);
-        header('Location: /item/show/' . $item->id);
+        header('Location: /items/' . $item->id);
         exit;
     }
 
@@ -89,7 +89,7 @@ class ItemController
             $this->notFound();
         }
         Item::delete($id);
-        header('Location: /item/index');
+        header('Location: /items');
         exit;
     }
 

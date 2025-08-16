@@ -21,13 +21,15 @@
             <td><?php echo (int)$item->quantity; ?></td>
             <td><?php echo htmlspecialchars($item->price); ?></td>
             <td>
-                <a href="/item/edit/<?php echo $item->id; ?>">Edit</a>
-                <a href="/item/destroy/<?php echo $item->id; ?>">Delete</a>
+                <a href="/items/<?php echo $item->id; ?>/edit">Edit</a>
+                <form method="POST" action="/items/<?php echo $item->id; ?>/delete" style="display:inline">
+                    <button type="submit">Delete</button>
+                </form>
             </td>
         </tr>
     <?php endforeach; ?>
     </tbody>
 </table>
-<p><a href="/item/create">Create Item</a></p>
+<p><a href="/items/create">Create Item</a></p>
 </body>
 </html>
