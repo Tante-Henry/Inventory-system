@@ -16,6 +16,12 @@ INSERT INTO products (category_id, supplier_id, name, price, stock) VALUES
 (1, 1, 'Laptop', 999.99, 10),
 (2, 1, 'Office Chair', 199.99, 20);
 
+INSERT INTO items (name, quantity, price) VALUES
+('Keyboard', 15, 49.99),
+('Mouse', 30, 19.95),
+('Monitor', 8, 129.50),
+('USB Cable', 50, 5.99);
+
 INSERT INTO workers (user_id, name, contact_info) VALUES
 (2, 'John Doe', 'john@example.com');
 
