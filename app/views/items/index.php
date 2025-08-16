@@ -22,7 +22,7 @@
             <td><?php echo htmlspecialchars($item->price); ?></td>
             <td>
                 <a href="/items/<?php echo $item->id; ?>/edit">Edit</a>
-                <form method="POST" action="/items/<?php echo $item->id; ?>/delete" style="display:inline">
+                <form method="POST" action="/items/<?php echo $item->id; ?>/delete" style="display:inline" onsubmit="return confirm('Are you sure you want to delete this item?');">
                     <button type="submit">Delete</button>
                 </form>
             </td>
