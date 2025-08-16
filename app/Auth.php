@@ -5,6 +5,16 @@ class Auth
 {
     private static $secret = 'secretkey';
 
+    private static function b64url($data)
+    {
+        return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
+    }
+
+    private static function b64urlDecode($data)
+    {
+        return base64_decode(strtr($data, '-_', '+/'));
+    }
+
     public static function login($name, $password)
     {
         $user = User::findByName($name);
@@ -16,10 +26,10 @@ class Auth
 
     public static function jwtEncode($payload)
     {
-        $header = base64_encode(json_encode(['alg'=>'HS256','typ'=>'JWT']));
-        $body = base64_encode(json_encode($payload));
-        $sig = hash_hmac('sha256', "$header.$body", self::$secret, true);
-        return "$header.$body." . base64_encode($sig);
+        $header = self::b64url(json_encode(['alg'=>'HS256','typ'=>'JWT']));
+        $body = self::b64url(json_encode($payload));
+        $sig = self::b64url(hash_hmac('sha256', "$header.$body", self::$secret, true));
+        return "$header.$body.$sig";
     }
 
     public static function jwtDecode($token)
@@ -27,8 +37,8 @@ class Auth
         $parts = explode('.', $token);
         if (count($parts) !== 3) return null;
         list($header, $body, $signature) = $parts;
-        $expected = base64_encode(hash_hmac('sha256', "$header.$body", self::$secret, true));
+        $expected = self::b64url(hash_hmac('sha256', "$header.$body", self::$secret, true));
         if (!hash_equals($expected, $signature)) return null;
-        return json_decode(base64_decode($body), true);
+        return json_decode(self::b64urlDecode($body), true);
     }
 }

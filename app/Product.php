@@ -63,7 +63,7 @@ class Product
     public static function create($name, $price, $stock)
     {
         $products = self::all();
-        $id = count($products) + 1;
+        $id = $products ? max(array_map(function($p){return $p->id;}, $products)) + 1 : 1;
         $product = new self($id, $name, $price, $stock);
         $products[] = $product;
         self::saveAll($products);

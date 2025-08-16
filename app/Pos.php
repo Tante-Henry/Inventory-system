@@ -6,6 +6,9 @@ class Pos
 {
     public static function checkout($user, $client, $items)
     {
+        if (!$client) {
+            throw new Exception('Client required');
+        }
         $total = 0;
         $lines = [];
         foreach ($items as $item) {
@@ -39,7 +42,7 @@ class Pos
         foreach ($lines as $l) {
             $html .= "<tr><td>{$l['name']}</td><td>{$l['qty']}</td><td>{$l['price']}</td><td>{$l['total']}</td></tr>";
         }
-        $html .= "</table><p>Total: {$total}</p>";
+        $html .= "</table><p>Total: {$total}</p><p>Thank you for your purchase</p>";
         return $html;
     }
 
