@@ -83,3 +83,9 @@ CREATE TABLE items (
     quantity INT NOT NULL,
     price DECIMAL(10,2) NOT NULL
 ) ENGINE=InnoDB;
+
+-- Seed data for items
+INSERT INTO items (name, quantity, price) VALUES
+    ('Widget A', 100, 9.99),
+    ('Gadget B', 50, 14.50),
+    ('Component C', 200, 4.75);
