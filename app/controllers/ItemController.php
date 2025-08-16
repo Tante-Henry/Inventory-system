@@ -27,7 +27,7 @@ class ItemController
     {
         $data = $this->validateRequest($_POST);
         if ($data === false) {
-            header('HTTP/1.0 400 Bad Request');
+            http_response_code(400);
             echo 'Invalid input';
             return;
         }
@@ -55,7 +55,7 @@ class ItemController
         }
         $data = $this->validateRequest($_POST, true);
         if ($data === false) {
-            header('HTTP/1.0 400 Bad Request');
+            http_response_code(400);
             echo 'Invalid input';
             return;
         }
@@ -115,7 +115,7 @@ class ItemController
 
     private function notFound()
     {
-        header('HTTP/1.0 404 Not Found');
-        echo '404 Not Found';
+        http_response_code(404);
+        require __DIR__ . '/../views/errors/404.php';
     }
 }
