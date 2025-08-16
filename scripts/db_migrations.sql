@@ -88,4 +88,6 @@ CREATE TABLE items (
 INSERT INTO items (name, quantity, price) VALUES
     ('Widget A', 100, 9.99),
     ('Gadget B', 50, 14.50),
-    ('Component C', 200, 4.75);
+    ('Component C', 200, 4.75),
+    ('Device D', 75, 29.99),
+    ('Accessory E', 120, 3.99);
