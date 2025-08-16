@@ -76,3 +76,10 @@ CREATE TABLE audit_logs (
     INDEX idx_log_user (user_id),
     CONSTRAINT fk_logs_user FOREIGN KEY (user_id) REFERENCES users(id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    quantity INT NOT NULL,
+    price DECIMAL(10,2) NOT NULL
+) ENGINE=InnoDB;
